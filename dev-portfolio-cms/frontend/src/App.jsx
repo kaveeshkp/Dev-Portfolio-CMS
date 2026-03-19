@@ -1,19 +1,49 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import PublicLayout from './layouts/PublicLayout'
+import AdminLayout from './layouts/AdminLayout'
+import Home from './pages/Home'
+import Projects from './pages/Projects'
+import Skills from './pages/Skills'
+import Contact from './pages/Contact'
+import Blog from './pages/Blog'
+import BlogDetail from './pages/BlogDetail'
+import About from './pages/About'
+import AdminLogin from './admin/AdminLogin'
+import Dashboard from './admin/Dashboard'
+import ManageProjects from './admin/ManageProjects'
+import ManageSkills from './admin/ManageSkills'
+import ManageProfile from './admin/ManageProfile'
+import ManageBlogs from './admin/ManageBlogs'
+import ManageMessages from './admin/ManageMessages'
+
 function App() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <section className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 py-24 text-center">
-        <p className="rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-1 text-sm text-cyan-200">
-          React + Tailwind CSS
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-          Fresh setup complete
-        </h1>
-        <p className="max-w-2xl text-lg text-slate-300">
-          This project has been reset and created with a React JavaScript structure
-          and Tailwind CSS integrated through Vite.
-        </p>
-      </section>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/about" element={<About />} />
+        </Route>
+
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="projects" element={<ManageProjects />} />
+          <Route path="skills" element={<ManageSkills />} />
+          <Route path="profile" element={<ManageProfile />} />
+          <Route path="blogs" element={<ManageBlogs />} />
+          <Route path="messages" element={<ManageMessages />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
