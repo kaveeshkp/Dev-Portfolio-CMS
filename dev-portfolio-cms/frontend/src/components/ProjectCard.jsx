@@ -1,11 +1,35 @@
-function ProjectCard({ title, description, stack }) {
+function ProjectCard(props) {
+  const project = props.project ?? props;
+
   return (
-    <article className="rounded-xl border border-slate-800 bg-slate-900 p-5">
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      <p className="mt-2 text-sm text-slate-300">{description}</p>
-      <p className="mt-3 text-xs text-cyan-300">{stack}</p>
-    </article>
-  )
+    <div className="bg-white rounded-xl shadow p-5">
+      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+      <p className="text-slate-600 mb-3">{project.description}</p>
+      <p className="text-sm mb-4">{project.techStack ?? project.stack}</p>
+      <div className="flex gap-3">
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="bg-black text-white px-4 py-2 rounded"
+          >
+            GitHub
+          </a>
+        )}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="border border-black px-4 py-2 rounded"
+          >
+            Live Demo
+          </a>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default ProjectCard
+export default ProjectCard;

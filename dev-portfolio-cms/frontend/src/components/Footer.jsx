@@ -1,11 +1,11 @@
 function Footer() {
   return (
-    <footer className="mt-auto border-t border-slate-800 bg-slate-900">
-      <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-slate-400">
-        Copyright {new Date().getFullYear()} Dev Portfolio CMS
+    <footer className="bg-slate-900 text-white py-6 mt-12">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <p>© 2026 Dev Portfolio CMS. All rights reserved.</p>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

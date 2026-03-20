@@ -1,13 +1,22 @@
 package com.portfolio.backend.controller;
 
-import com.portfolio.backend.entity.Project;
-import com.portfolio.backend.service.ProjectService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.portfolio.backend.entity.Project;
+import com.portfolio.backend.service.ProjectService;
+
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ProjectController {
 
@@ -17,27 +26,29 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping
+    // PUBLIC
+    @GetMapping("/projects")
     public List<Project> getPublishedProjects() {
         return projectService.getPublishedProjects();
     }
 
-    @GetMapping("/admin")
+    // ADMIN
+    @GetMapping("/admin/projects")
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
     }
 
-    @PostMapping
+    @PostMapping("/admin/projects")
     public Project createProject(@RequestBody Project project) {
         return projectService.createProject(project);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/projects/{id}")
     public Project updateProject(@PathVariable Long id, @RequestBody Project project) {
         return projectService.updateProject(id, project);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/projects/{id}")
     public void deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
     }
