@@ -1,13 +1,22 @@
 package com.portfolio.backend.controller;
 
-import com.portfolio.backend.entity.BlogPost;
-import com.portfolio.backend.service.BlogPostService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.portfolio.backend.entity.BlogPost;
+import com.portfolio.backend.service.BlogPostService;
+
 @RestController
-@RequestMapping("/api/blogs")
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:5173")
 public class BlogPostController {
 
@@ -17,32 +26,34 @@ public class BlogPostController {
         this.blogPostService = blogPostService;
     }
 
-    @GetMapping
+    // PUBLIC
+    @GetMapping("/blogs")
     public List<BlogPost> getPublishedPosts() {
         return blogPostService.getPublishedPosts();
     }
 
-    @GetMapping("/admin")
-    public List<BlogPost> getAllPosts() {
-        return blogPostService.getAllPosts();
-    }
-
-    @GetMapping("/{slug}")
+    @GetMapping("/blogs/{slug}")
     public BlogPost getBySlug(@PathVariable String slug) {
         return blogPostService.getBySlug(slug);
     }
 
-    @PostMapping
+    // ADMIN
+    @GetMapping("/admin/blogs")
+    public List<BlogPost> getAllPosts() {
+        return blogPostService.getAllPosts();
+    }
+
+    @PostMapping("/admin/blogs")
     public BlogPost createPost(@RequestBody BlogPost post) {
         return blogPostService.createPost(post);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/blogs/{id}")
     public BlogPost updatePost(@PathVariable Long id, @RequestBody BlogPost post) {
         return blogPostService.updatePost(id, post);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/blogs/{id}")
     public void deletePost(@PathVariable Long id) {
         blogPostService.deletePost(id);
     }

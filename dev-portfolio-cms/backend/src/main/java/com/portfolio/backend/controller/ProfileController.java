@@ -1,11 +1,17 @@
 package com.portfolio.backend.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.portfolio.backend.entity.Profile;
 import com.portfolio.backend.service.ProfileService;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/profile")
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:5173")
 public class ProfileController {
 
@@ -15,12 +21,14 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @GetMapping
+    // PUBLIC
+    @GetMapping("/profile")
     public Profile getProfile() {
         return profileService.getProfile();
     }
 
-    @PutMapping
+    // ADMIN
+    @PutMapping("/admin/profile")
     public Profile updateProfile(@RequestBody Profile profile) {
         return profileService.updateProfile(profile);
     }

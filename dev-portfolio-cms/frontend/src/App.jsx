@@ -15,6 +15,7 @@ import ManageBlogs from "./admin/ManageBlogs";
 import ManageMessages from "./admin/ManageMessages";
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -31,9 +32,8 @@ function App() {
         </Route>
 
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<RequireAuth><AdminLayout /></RequireAuth>}>
           <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Navigate to="/admin" replace />} />
           <Route path="projects" element={<ManageProjects />} />
           <Route path="skills" element={<ManageSkills />} />
           <Route path="profile" element={<ManageProfile />} />
