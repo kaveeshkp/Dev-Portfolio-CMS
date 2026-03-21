@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const adminLinks = [
   { to: '/admin', label: 'Dashboard', end: true },
@@ -10,10 +11,11 @@ const adminLinks = [
 ]
 
 function AdminLayout() {
+  const { logout } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
+    logout()
     navigate('/admin/login')
   }
 

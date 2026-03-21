@@ -1,7 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function RequireAuth({ children }) {
-  const token = localStorage.getItem('token')
+  const { token } = useAuth()
   const location = useLocation()
 
   if (!token) {

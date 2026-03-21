@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import { useAuth } from "../context/AuthContext";
 
 function AdminLogin() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ function AdminLogin() {
     e.preventDefault();
     try {
       const response = await api.post("/auth/login", { email, password });
-      localStorage.setItem("token", response.data.token);
+      login(response.data.token);
       navigate("/admin");
     } catch (error) {
       alert("Invalid credentials");
