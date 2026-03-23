@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
+import { BlogCardSkeleton } from "../components/Skeleton";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -46,28 +47,29 @@ function Blog() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-slate-500 mb-2 tracking-wide uppercase">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2 tracking-wide uppercase">
             Articles
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Blog
           </h1>
-          <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Thoughts on web development, programming, and technology.
           </p>
         </div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block w-8 h-8 border-4 border-slate-200 border-t-slate-900 rounded-full animate-spin"></div>
-            <p className="mt-4 text-slate-500">Loading posts...</p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <BlogCardSkeleton key={i} />
+            ))}
           </div>
         ) : displayPosts.length === 0 ? (
-          <div className="text-center py-12 bg-slate-100 rounded-2xl">
-            <p className="text-slate-500">No blog posts available yet.</p>
+          <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <p className="text-slate-500 dark:text-slate-400">No blog posts available yet.</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -75,24 +77,24 @@ function Blog() {
               <Link
                 key={post.id}
                 to={`/blog/${post.id}`}
-                className="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition duration-300"
+                className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition duration-300"
               >
                 <div className="h-40 bg-gradient-to-br from-slate-800 to-slate-600"></div>
                 <div className="p-6">
                   {post.createdAt && (
-                    <p className="text-sm text-slate-500 mb-2">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
                       {formatDate(post.createdAt)}
                     </p>
                   )}
-                  <h2 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-slate-700 dark:group-hover:text-slate-300 transition">
                     {post.title}
                   </h2>
                   {post.summary && (
-                    <p className="mt-3 text-slate-600 line-clamp-2">
+                    <p className="mt-3 text-slate-600 dark:text-slate-400 line-clamp-2">
                       {post.summary}
                     </p>
                   )}
-                  <span className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-slate-900">
+                  <span className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-slate-900 dark:text-white">
                     Read more
                     <svg
                       className="w-4 h-4 group-hover:translate-x-1 transition"

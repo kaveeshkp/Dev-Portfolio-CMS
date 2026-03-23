@@ -36,11 +36,11 @@ function Home() {
   };
 
   return (
-    <div className="bg-slate-50 text-slate-900">
+    <div className="text-slate-900 dark:text-slate-100">
       {/* Hero Section */}
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
         <div>
-          <p className="mb-4 inline-block rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600">
+          <p className="mb-4 inline-block rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300">
             Full Stack Developer
           </p>
 
@@ -48,7 +48,7 @@ function Home() {
             Building clean and modern web applications
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             {profile.bio ||
               "I create responsive frontend experiences and secure backend systems using React, Spring Boot, and MySQL."}
           </p>
@@ -56,14 +56,14 @@ function Home() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               to="/projects"
-              className="rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-slate-700"
+              className="rounded-xl bg-slate-900 dark:bg-white px-6 py-3 font-medium text-white dark:text-slate-900 transition hover:bg-slate-700 dark:hover:bg-slate-200"
             >
               View Projects
             </Link>
 
             <Link
               to="/contact"
-              className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-medium text-slate-700 transition hover:bg-slate-100"
+              className="rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-6 py-3 font-medium text-slate-700 dark:text-slate-200 transition hover:bg-slate-100 dark:hover:bg-slate-700"
             >
               Contact Me
             </Link>
@@ -72,21 +72,21 @@ function Home() {
           <div className="mt-10 flex flex-wrap gap-8">
             <div>
               <p className="text-3xl font-bold">{projects.length || 3}+</p>
-              <p className="text-sm text-slate-500">Featured Projects</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Featured Projects</p>
             </div>
             <div>
               <p className="text-3xl font-bold">{skills.length || 6}+</p>
-              <p className="text-sm text-slate-500">Core Skills</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Core Skills</p>
             </div>
             <div>
               <p className="text-3xl font-bold">100%</p>
-              <p className="text-sm text-slate-500">Responsive UI</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Responsive UI</p>
             </div>
           </div>
         </div>
 
         <div className="relative">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm">
             <div className="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-600 text-center text-white">
               <div>
                 <p className="text-sm uppercase tracking-[0.3em] text-slate-300">
@@ -102,33 +102,33 @@ function Home() {
             </div>
           </div>
 
-          <div className="absolute -left-4 top-8 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+          <div className="absolute -left-4 top-8 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 shadow-md text-sm font-medium dark:text-slate-200">
             React
           </div>
-          <div className="absolute -right-3 top-20 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+          <div className="absolute -right-3 top-20 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 shadow-md text-sm font-medium dark:text-slate-200">
             Spring Boot
           </div>
-          <div className="absolute bottom-6 left-8 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+          <div className="absolute bottom-6 left-8 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 shadow-md text-sm font-medium dark:text-slate-200">
             MySQL
           </div>
         </div>
       </section>
 
       {/* About Preview */}
-      <section className="mx-auto max-w-6xl px-6 py-8">
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+      <section className="mx-auto max-w-6xl px-6 pb-20">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm md:p-10">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
             About Me
           </p>
           <h2 className="mt-3 text-3xl font-bold">Turning ideas into polished products</h2>
-          <p className="mt-4 max-w-3xl leading-8 text-slate-600">
+          <p className="mt-4 max-w-3xl leading-8 text-slate-600 dark:text-slate-400">
             I enjoy building user-friendly interfaces and reliable backend systems.
             My focus is on creating projects that are clean, fast, secure, and easy
             to maintain.
           </p>
           <Link
             to="/about"
-            className="mt-6 inline-block rounded-xl bg-slate-900 px-5 py-3 text-sm font-medium text-white hover:bg-slate-700"
+            className="mt-6 inline-block rounded-xl bg-slate-900 dark:bg-white px-5 py-3 text-sm font-medium text-white dark:text-slate-900 hover:bg-slate-700 dark:hover:bg-slate-200"
           >
             More About Me
           </Link>
@@ -136,10 +136,10 @@ function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Portfolio Highlights
             </p>
             <h2 className="mt-2 text-3xl font-bold">Featured Projects</h2>
@@ -147,14 +147,14 @@ function Home() {
 
           <Link
             to="/projects"
-            className="text-sm font-medium text-slate-700 hover:text-slate-900"
+            className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
           >
             View all projects →
           </Link>
         </div>
 
         {projects.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-500">
+          <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-8 text-center text-slate-500 dark:text-slate-400">
             No projects added yet.
           </div>
         ) : (
@@ -167,40 +167,38 @@ function Home() {
       </section>
 
       {/* Skills Preview */}
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="mb-10 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                Tech Stack
-              </p>
-              <h2 className="mt-2 text-3xl font-bold">Skills Preview</h2>
-            </div>
-
-            <Link
-              to="/skills"
-              className="text-sm font-medium text-slate-700 hover:text-slate-900"
-            >
-              View all skills →
-            </Link>
+      <section className="mx-auto max-w-6xl px-6 pb-20">
+        <div className="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              Tech Stack
+            </p>
+            <h2 className="mt-2 text-3xl font-bold">Skills Preview</h2>
           </div>
 
-          {skills.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-300 p-8 text-center text-slate-500">
-              No skills available yet.
-            </div>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {skills.map((skill) => (
-                <SkillCard key={skill.id} skill={skill} />
-              ))}
-            </div>
-          )}
+          <Link
+            to="/skills"
+            className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+          >
+            View all skills →
+          </Link>
         </div>
+
+        {skills.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-8 text-center text-slate-500 dark:text-slate-400">
+            No skills available yet.
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {skills.map((skill) => (
+              <SkillCard key={skill.id} skill={skill} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* CTA Section */}
-      <section className="bg-slate-900 py-20 text-white">
+      <section className="bg-slate-900 dark:bg-slate-800 py-20 text-white">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">
             Let's Work Together
@@ -222,7 +220,7 @@ function Home() {
             </Link>
             <Link
               to="/projects"
-              className="rounded-xl border border-slate-600 px-6 py-3 font-medium text-white hover:bg-slate-800"
+              className="rounded-xl border border-slate-600 px-6 py-3 font-medium text-white hover:bg-slate-700"
             >
               See My Work
             </Link>

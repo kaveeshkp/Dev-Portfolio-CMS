@@ -37,16 +37,16 @@ function Contact() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-slate-500 mb-2 tracking-wide uppercase">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2 tracking-wide uppercase">
             Get in Touch
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Contact Me
           </h1>
-          <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Have a project in mind or just want to say hello? I'd love to hear
             from you.
           </p>
@@ -54,8 +54,8 @@ function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Form */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Send a Message
             </h2>
 
@@ -63,7 +63,7 @@ function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-slate-700 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Name
                 </label>
@@ -74,7 +74,7 @@ function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-white focus:border-transparent transition"
                   placeholder="Your name"
                 />
               </div>
@@ -82,7 +82,7 @@ function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-slate-700 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Email
                 </label>
@@ -93,7 +93,7 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-white focus:border-transparent transition"
                   placeholder="your@email.com"
                 />
               </div>
@@ -101,7 +101,7 @@ function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-slate-700 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Message
                 </label>
@@ -112,7 +112,7 @@ function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-white focus:border-transparent transition resize-none"
                   placeholder="Your message..."
                 />
               </div>
@@ -121,8 +121,8 @@ function Contact() {
                 <div
                   className={`p-4 rounded-xl ${
                     status.type === "success"
-                      ? "bg-green-50 text-green-700 border border-green-200"
-                      : "bg-red-50 text-red-700 border border-red-200"
+                      ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800"
+                      : "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800"
                   }`}
                 >
                   {status.message}
@@ -132,7 +132,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full px-6 py-3 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                className="w-full px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium hover:bg-slate-800 dark:hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
                 {submitting ? "Sending..." : "Send Message"}
               </button>
@@ -142,10 +142,10 @@ function Contact() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                 Contact Information
               </h2>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 I'm currently available for freelance work, collaborations, and
                 full-time opportunities. Feel free to reach out through any of
                 the channels below.
@@ -155,9 +155,9 @@ function Contact() {
             <div className="space-y-4">
               <a
                 href="mailto:kaveeshabandara1812@gmail.com"
-                className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:shadow-md transition"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:shadow-md transition"
               >
-                <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl flex items-center justify-center">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -173,8 +173,8 @@ function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Email</p>
-                  <p className="text-slate-600">kaveeshabandara1812@gmail.com</p>
+                  <p className="font-medium text-slate-900 dark:text-white">Email</p>
+                  <p className="text-slate-600 dark:text-slate-400">kaveeshabandara1812@gmail.com</p>
                 </div>
               </a>
 
@@ -182,9 +182,9 @@ function Contact() {
                 href="https://github.com/kaveeshkp"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:shadow-md transition"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:shadow-md transition"
               >
-                <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl flex items-center justify-center">
                   <svg
                     className="w-5 h-5"
                     fill="currentColor"
@@ -194,8 +194,8 @@ function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">GitHub</p>
-                  <p className="text-slate-600">github.com/kaveeshkp</p>
+                  <p className="font-medium text-slate-900 dark:text-white">GitHub</p>
+                  <p className="text-slate-600 dark:text-slate-400">github.com/kaveeshkp</p>
                 </div>
               </a>
 
@@ -203,9 +203,9 @@ function Contact() {
                 href="https://linkedin.com/in/kaveesha"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:shadow-md transition"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:shadow-md transition"
               >
-                <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl flex items-center justify-center">
                   <svg
                     className="w-5 h-5"
                     fill="currentColor"
@@ -215,8 +215,8 @@ function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">LinkedIn</p>
-                  <p className="text-slate-600">linkedin.com/in/kaveesha</p>
+                  <p className="font-medium text-slate-900 dark:text-white">LinkedIn</p>
+                  <p className="text-slate-600 dark:text-slate-400">linkedin.com/in/kaveesha</p>
                 </div>
               </a>
             </div>
