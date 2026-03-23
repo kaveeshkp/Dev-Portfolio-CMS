@@ -154,7 +154,7 @@ function Contact() {
 
             <div className="space-y-4">
               <a
-                href="mailto:hello@kaveesha.dev"
+                href="mailto:kaveeshabandara1812@gmail.com"
                 className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:shadow-md transition"
               >
                 <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
@@ -174,12 +174,12 @@ function Contact() {
                 </div>
                 <div>
                   <p className="font-medium text-slate-900">Email</p>
-                  <p className="text-slate-600">hello@kaveesha.dev</p>
+                  <p className="text-slate-600">kaveeshabandara1812@gmail.com</p>
                 </div>
               </a>
 
               <a
-                href="https://github.com/kaveesha"
+                href="https://github.com/kaveeshkp"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:shadow-md transition"
@@ -195,7 +195,7 @@ function Contact() {
                 </div>
                 <div>
                   <p className="font-medium text-slate-900">GitHub</p>
-                  <p className="text-slate-600">github.com/kaveesha</p>
+                  <p className="text-slate-600">github.com/kaveeshkp</p>
                 </div>
               </a>
 
