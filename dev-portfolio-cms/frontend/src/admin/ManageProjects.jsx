@@ -66,66 +66,123 @@ function ManageProjects() {
     }
   };
 
+  const inputClass =
+    "w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition";
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-white">Manage Projects</h1>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-slate-900">Manage Projects</h1>
+        <p className="mt-2 text-slate-600">Add and manage your portfolio projects</p>
+      </div>
 
       {error && (
-        <div className="bg-red-500/20 border border-red-500 text-red-300 p-4 rounded-lg mb-6">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl mb-6">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-slate-800 p-6 rounded-xl mb-8 space-y-4">
-        <input className="w-full bg-slate-700 text-white border border-slate-600 p-3 rounded" placeholder="Title"
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-        />
-        <textarea className="w-full bg-slate-700 text-white border border-slate-600 p-3 rounded" placeholder="Description"
-          value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
-        />
-        <input className="w-full bg-slate-700 text-white border border-slate-600 p-3 rounded" placeholder="Tech Stack"
-          value={form.techStack}
-          onChange={(e) => setForm({ ...form, techStack: e.target.value })}
-        />
-        <input className="w-full bg-slate-700 text-white border border-slate-600 p-3 rounded" placeholder="GitHub URL"
-          value={form.githubUrl}
-          onChange={(e) => setForm({ ...form, githubUrl: e.target.value })}
-        />
-        <input className="w-full bg-slate-700 text-white border border-slate-600 p-3 rounded" placeholder="Live URL"
-          value={form.liveUrl}
-          onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
-        />
-        <button
-          disabled={submitting}
-          className="bg-cyan-600 hover:bg-cyan-700 disabled:bg-slate-600 text-white px-6 py-3 rounded"
-        >
-          {submitting ? "Adding..." : "Add Project"}
-        </button>
-      </form>
-
-      {loading ? (
-        <p className="text-slate-400">Loading projects...</p>
-      ) : projects.length === 0 ? (
-        <p className="text-slate-400">No projects yet. Add one above.</p>
-      ) : (
-        <div className="grid gap-4">
-          {projects.map((project) => (
-            <div key={project.id} className="bg-slate-800 p-5 rounded-xl">
-              <h2 className="text-xl font-bold text-white">{project.title}</h2>
-              <p className="text-slate-400">{project.description}</p>
-              <p className="text-slate-500 text-sm">{project.techStack}</p>
-              <button
-                onClick={() => handleDelete(project.id)}
-                className="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-              >
-                Delete
-              </button>
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-8">
+        <h2 className="text-lg font-semibold text-slate-900 mb-4">Add New Project</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Title</label>
+              <input
+                className={inputClass}
+                placeholder="Project title"
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                required
+              />
             </div>
-          ))}
-        </div>
-      )}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Tech Stack</label>
+              <input
+                className={inputClass}
+                placeholder="React, Node.js, MySQL"
+                value={form.techStack}
+                onChange={(e) => setForm({ ...form, techStack: e.target.value })}
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
+            <textarea
+              className={inputClass}
+              placeholder="Project description"
+              rows={3}
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+            />
+          </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">GitHub URL</label>
+              <input
+                className={inputClass}
+                placeholder="https://github.com/..."
+                value={form.githubUrl}
+                onChange={(e) => setForm({ ...form, githubUrl: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Live URL</label>
+              <input
+                className={inputClass}
+                placeholder="https://..."
+                value={form.liveUrl}
+                onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="px-6 py-3 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            {submitting ? "Adding..." : "Add Project"}
+          </button>
+        </form>
+      </div>
+
+      <div className="bg-white border border-slate-200 rounded-2xl p-6">
+        <h2 className="text-lg font-semibold text-slate-900 mb-4">Existing Projects</h2>
+        {loading ? (
+          <div className="text-center py-8">
+            <div className="inline-block w-6 h-6 border-2 border-slate-200 border-t-slate-900 rounded-full animate-spin"></div>
+            <p className="mt-2 text-slate-500">Loading projects...</p>
+          </div>
+        ) : projects.length === 0 ? (
+          <p className="text-slate-500 text-center py-8">No projects yet. Add one above.</p>
+        ) : (
+          <div className="space-y-4">
+            {projects.map((project) => (
+              <div key={project.id} className="flex items-start justify-between p-4 bg-slate-50 rounded-xl">
+                <div className="flex-1">
+                  <h3 className="font-semibold text-slate-900">{project.title}</h3>
+                  <p className="text-slate-600 text-sm mt-1">{project.description}</p>
+                  {project.techStack && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.techStack.split(",").map((tech, i) => (
+                        <span key={i} className="px-2 py-1 text-xs rounded-full bg-slate-200 text-slate-700">
+                          {tech.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <button
+                  onClick={() => handleDelete(project.id)}
+                  className="ml-4 px-4 py-2 rounded-xl bg-red-50 text-red-600 text-sm font-medium hover:bg-red-100 transition"
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
