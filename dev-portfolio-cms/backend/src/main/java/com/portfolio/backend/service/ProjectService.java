@@ -1,11 +1,12 @@
 package com.portfolio.backend.service;
 
-import com.portfolio.backend.entity.Project;
-import com.portfolio.backend.repository.ProjectRepository;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.portfolio.backend.entity.Project;
+import com.portfolio.backend.repository.ProjectRepository;
 
 @Service
 public class ProjectService {
@@ -37,7 +38,6 @@ public class ProjectService {
         project.setDescription(updatedProject.getDescription());
         project.setTechStack(updatedProject.getTechStack());
         project.setGithubUrl(updatedProject.getGithubUrl());
-        project.setLiveUrl(updatedProject.getLiveUrl());
         project.setImageUrl(updatedProject.getImageUrl());
         project.setFeatured(updatedProject.isFeatured());
         project.setPublished(updatedProject.isPublished());

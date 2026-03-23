@@ -11,7 +11,6 @@ function ManageProjects() {
     description: "",
     techStack: "",
     githubUrl: "",
-    liveUrl: "",
     imageUrl: "",
     featured: false,
     published: true,
@@ -36,21 +35,28 @@ function ManageProjects() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
+
+    console.log("Submitting project:", form);
+
     try {
-      await api.post("/admin/projects", form);
+      const response = await api.post("/admin/projects", form);
+      console.log("Success:", response.data);
+
       setForm({
         title: "",
         description: "",
         techStack: "",
         githubUrl: "",
-        liveUrl: "",
         imageUrl: "",
         featured: false,
         published: true,
       });
       fetchProjects();
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to add project");
+      console.error("Error creating project:", err);
+      console.error("Error response:", err.response);
+      setError(err.response?.data?.message || err.message || "Failed to add project");
     } finally {
       setSubmitting(false);
     }
@@ -116,25 +122,14 @@ function ManageProjects() {
               onChange={(e) => setForm({ ...form, description: e.target.value })}
             />
           </div>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">GitHub URL</label>
-              <input
-                className={inputClass}
-                placeholder="https://github.com/..."
-                value={form.githubUrl}
-                onChange={(e) => setForm({ ...form, githubUrl: e.target.value })}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Live URL</label>
-              <input
-                className={inputClass}
-                placeholder="https://..."
-                value={form.liveUrl}
-                onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">GitHub URL</label>
+            <input
+              className={inputClass}
+              placeholder="https://github.com/..."
+              value={form.githubUrl}
+              onChange={(e) => setForm({ ...form, githubUrl: e.target.value })}
+            />
           </div>
           <button
             type="submit"
