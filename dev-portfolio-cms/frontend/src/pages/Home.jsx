@@ -1,164 +1,235 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
-import Hero from "../components/Hero";
 import ProjectCard from "../components/ProjectCard";
+import SkillCard from "../components/SkillCard";
 
 function Home() {
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [skills, setSkills] = useState([]);
+  const [profile, setProfile] = useState({
+    fullName: "Kaveesha",
+    title: "Full Stack Developer",
+    bio: "I build modern web applications with React and Spring Boot.",
+  });
 
   useEffect(() => {
-    api
-      .get("/projects")
-      .then((res) => setProjects(res.data.slice(0, 3)))
-      .catch(() => setProjects([]))
-      .finally(() => setLoading(false));
+    fetchHomeData();
   }, []);
 
-  const skills = [
-    { name: "React", category: "Frontend", icon: "⚛️" },
-    { name: "Spring Boot", category: "Backend", icon: "🍃" },
-    { name: "MySQL", category: "Database", icon: "🗄️" },
-    { name: "Tailwind CSS", category: "Frontend", icon: "🎨" },
-    { name: "REST API", category: "Backend", icon: "🔗" },
-    { name: "Git", category: "Tools", icon: "📦" },
-  ];
+  const fetchHomeData = async () => {
+    try {
+      const [projectsRes, skillsRes, profileRes] = await Promise.all([
+        api.get("/projects"),
+        api.get("/skills"),
+        api.get("/profile"),
+      ]);
+
+      setProjects(projectsRes.data.slice(0, 3));
+      setSkills(skillsRes.data.slice(0, 6));
+      if (profileRes.data) {
+        setProfile(profileRes.data);
+      }
+    } catch (error) {
+      console.error("Failed to load home data", error);
+    }
+  };
 
   return (
-    <>
-      <Hero />
+    <div className="bg-slate-50 text-slate-900">
+      {/* Hero Section */}
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
+        <div>
+          <p className="mb-4 inline-block rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600">
+            Full Stack Developer
+          </p>
 
-      {/* Featured Projects Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-slate-500 mb-2 tracking-wide uppercase">
-              Portfolio
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-              Featured Projects
-            </h2>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-              Explore some of my recent work showcasing modern web development
-              with React, Spring Boot, and more.
-            </p>
-          </div>
+          <h1 className="text-5xl font-bold leading-tight tracking-tight md:text-6xl">
+            Building clean and modern web applications
+          </h1>
 
-          {loading ? (
-            <p className="text-center text-slate-500">Loading projects...</p>
-          ) : projects.length === 0 ? (
-            <p className="text-center text-slate-500">
-              No projects available yet.
-            </p>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          )}
+          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+            {profile.bio ||
+              "I create responsive frontend experiences and secure backend systems using React, Spring Boot, and MySQL."}
+          </p>
 
-          <div className="text-center mt-12">
+          <div className="mt-8 flex flex-wrap gap-4">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium hover:bg-slate-100 transition"
+              className="rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-slate-700"
             >
-              View All Projects
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+              View Projects
             </Link>
+
+            <Link
+              to="/contact"
+              className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-medium text-slate-700 transition hover:bg-slate-100"
+            >
+              Contact Me
+            </Link>
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-8">
+            <div>
+              <p className="text-3xl font-bold">{projects.length || 3}+</p>
+              <p className="text-sm text-slate-500">Featured Projects</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold">{skills.length || 6}+</p>
+              <p className="text-sm text-slate-500">Core Skills</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold">100%</p>
+              <p className="text-sm text-slate-500">Responsive UI</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-600 text-center text-white">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-300">
+                  Portfolio
+                </p>
+                <h2 className="mt-4 text-3xl font-bold">
+                  {profile.fullName || "Kaveesha"}
+                </h2>
+                <p className="mt-2 text-slate-300">
+                  {profile.title || "Full Stack Developer"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute -left-4 top-8 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+            React
+          </div>
+          <div className="absolute -right-3 top-20 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+            Spring Boot
+          </div>
+          <div className="absolute bottom-6 left-8 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-md">
+            MySQL
           </div>
         </div>
       </section>
 
-      {/* Skills Preview Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-slate-500 mb-2 tracking-wide uppercase">
-              Expertise
+      {/* About Preview */}
+      <section className="mx-auto max-w-6xl px-6 py-8">
+        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+            About Me
+          </p>
+          <h2 className="mt-3 text-3xl font-bold">Turning ideas into polished products</h2>
+          <p className="mt-4 max-w-3xl leading-8 text-slate-600">
+            I enjoy building user-friendly interfaces and reliable backend systems.
+            My focus is on creating projects that are clean, fast, secure, and easy
+            to maintain.
+          </p>
+          <Link
+            to="/about"
+            className="mt-6 inline-block rounded-xl bg-slate-900 px-5 py-3 text-sm font-medium text-white hover:bg-slate-700"
+          >
+            More About Me
+          </Link>
+        </div>
+      </section>
+
+      {/* Featured Projects */}
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+              Portfolio Highlights
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-              Skills & Technologies
-            </h2>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-              Technologies I work with to build modern, scalable web applications.
-            </p>
+            <h2 className="mt-2 text-3xl font-bold">Featured Projects</h2>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map((skill) => (
-              <div
-                key={skill.name}
-                className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition duration-300"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl">{skill.icon}</span>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">
-                      {skill.name}
-                    </h3>
-                    <p className="text-sm text-slate-500">{skill.category}</p>
-                  </div>
-                </div>
-              </div>
+          <Link
+            to="/projects"
+            className="text-sm font-medium text-slate-700 hover:text-slate-900"
+          >
+            View all projects →
+          </Link>
+        </div>
+
+        {projects.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-500">
+            No projects added yet.
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
+        )}
+      </section>
 
-          <div className="text-center mt-12">
+      {/* Skills Preview */}
+      <section className="border-y border-slate-200 bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="mb-10 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                Tech Stack
+              </p>
+              <h2 className="mt-2 text-3xl font-bold">Skills Preview</h2>
+            </div>
+
             <Link
               to="/skills"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium hover:bg-slate-100 transition"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900"
             >
-              View All Skills
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+              View all skills →
             </Link>
           </div>
+
+          {skills.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-slate-300 p-8 text-center text-slate-500">
+              No skills available yet.
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {skills.map((skill) => (
+                <SkillCard key={skill.id} skill={skill} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-slate-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Let's build something great together
-          </h2>
-          <p className="mt-4 text-slate-300 text-lg">
-            I'm open to freelance work, collaborations, and developer opportunities.
+      <section className="bg-slate-900 py-20 text-white">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+            Let's Work Together
           </p>
-          <Link
-            to="/contact"
-            className="inline-block mt-8 px-8 py-4 rounded-xl bg-white text-slate-900 font-medium hover:bg-slate-100 transition"
-          >
-            Get In Touch
-          </Link>
+          <h2 className="mt-3 text-4xl font-bold md:text-5xl">
+            Have an idea? Let's build it.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+            I'm open to freelance work, collaborations, and developer opportunities.
+            Let's create something modern and meaningful.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/contact"
+              className="rounded-xl bg-white px-6 py-3 font-medium text-slate-900 hover:bg-slate-200"
+            >
+              Get In Touch
+            </Link>
+            <Link
+              to="/projects"
+              className="rounded-xl border border-slate-600 px-6 py-3 font-medium text-white hover:bg-slate-800"
+            >
+              See My Work
+            </Link>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
