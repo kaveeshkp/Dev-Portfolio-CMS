@@ -6,23 +6,20 @@ function Dashboard() {
   const [stats, setStats] = useState({
     projects: 0,
     skills: 0,
-    blogs: 0,
     messages: 0,
   });
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [projectsRes, skillsRes, blogsRes, messagesRes] = await Promise.all([
+        const [projectsRes, skillsRes, messagesRes] = await Promise.all([
           api.get("/projects").catch(() => ({ data: [] })),
           api.get("/skills").catch(() => ({ data: [] })),
-          api.get("/blogs").catch(() => ({ data: [] })),
           api.get("/messages").catch(() => ({ data: [] })),
         ]);
         setStats({
           projects: projectsRes.data.length,
           skills: skillsRes.data.length,
-          blogs: blogsRes.data.length,
           messages: messagesRes.data.length,
         });
       } catch {
@@ -54,16 +51,6 @@ function Dashboard() {
       to: "/admin/skills",
     },
     {
-      label: "Blogs",
-      value: stats.blogs,
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      ),
-      to: "/admin/blogs",
-    },
-    {
       label: "Messages",
       value: stats.messages,
       icon: (
@@ -78,7 +65,6 @@ function Dashboard() {
   const quickActions = [
     { label: "Add Project", to: "/admin/projects", color: "bg-blue-50 text-blue-700 hover:bg-blue-100" },
     { label: "Add Skill", to: "/admin/skills", color: "bg-green-50 text-green-700 hover:bg-green-100" },
-    { label: "Write Blog", to: "/admin/blogs", color: "bg-purple-50 text-purple-700 hover:bg-purple-100" },
     { label: "Edit Profile", to: "/admin/profile", color: "bg-orange-50 text-orange-700 hover:bg-orange-100" },
   ];
 
@@ -90,7 +76,7 @@ function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {statCards.map((stat) => (
           <Link
             key={stat.label}

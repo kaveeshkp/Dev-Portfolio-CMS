@@ -14,17 +14,17 @@ function About() {
 
   const timeline = [
     {
-      year: "2024",
+      year: "2025",
       title: "Full Stack Developer",
       description: "Building modern web applications with React and Spring Boot",
     },
     {
-      year: "2023",
+      year: "2025",
       title: "Started Learning Spring Boot",
       description: "Expanded backend skills with Java and Spring ecosystem",
     },
     {
-      year: "2022",
+      year: "2025",
       title: "Frontend Development",
       description: "Mastered React, Tailwind CSS, and modern JavaScript",
     },
@@ -69,7 +69,7 @@ function About() {
 
           <div className="relative">
             <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm p-8">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center">
+              <div className="aspect-square rounded-2xl bg-linear-to-br from-slate-900 to-slate-700 flex items-center justify-center">
                 <span className="text-8xl font-bold text-white/20">K</span>
               </div>
             </div>
@@ -104,7 +104,7 @@ function About() {
                 key={index}
                 className="flex gap-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6"
               >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <span className="inline-flex items-center justify-center w-16 h-16 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold">
                     {item.year}
                   </span>

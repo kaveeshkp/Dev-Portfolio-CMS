@@ -1,16 +1,19 @@
 package com.portfolio.backend.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.portfolio.backend.dto.LoginRequest;
 import com.portfolio.backend.dto.LoginResponse;
 import com.portfolio.backend.entity.User;
 import com.portfolio.backend.repository.UserRepository;
 import com.portfolio.backend.security.JwtUtil;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final UserRepository userRepository;

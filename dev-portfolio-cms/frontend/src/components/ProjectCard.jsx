@@ -5,7 +5,7 @@ function ProjectCard({ project }) {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-600" />
+      <div className="h-48 bg-linear-to-br from-slate-900 via-slate-800 to-slate-600" />
 
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
