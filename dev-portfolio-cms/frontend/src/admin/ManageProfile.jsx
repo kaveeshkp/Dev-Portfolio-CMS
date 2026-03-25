@@ -41,6 +41,33 @@ function ManageProfile() {
     }
   };
 
+  const handleImageFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please choose a valid image file.");
+      return;
+    }
+
+    // Keep DB payloads reasonably small for faster save/load.
+    const maxSizeBytes = 2 * 1024 * 1024;
+    if (file.size > maxSizeBytes) {
+      setError("Image is too large. Please choose an image under 2MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfile((prev) => ({ ...prev, profileImage: reader.result }));
+      setError(null);
+    };
+    reader.onerror = () => {
+      setError("Failed to read image file.");
+    };
+    reader.readAsDataURL(file);
+  };
+
   const inputClass =
     "w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition";
 
@@ -110,6 +137,48 @@ function ManageProfile() {
               value={profile.bio}
               onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
             />
+          </div>
+
+          <div className="grid md:grid-cols-[1fr_220px] gap-6 items-start">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Profile Image URL</label>
+              <input
+                className={inputClass}
+                placeholder="https://.../your-photo.jpg"
+                value={profile.profileImage || ""}
+                onChange={(e) => setProfile({ ...profile, profileImage: e.target.value })}
+              />
+
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-slate-700 mb-2">Or Upload From PC</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageFileChange}
+                  className="block w-full text-sm text-slate-700 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-900 file:px-4 file:py-2 file:text-white hover:file:bg-slate-800"
+                />
+              </div>
+
+              <p className="mt-2 text-xs text-slate-500">You can paste a direct image URL or upload an image from your computer (max 2MB).</p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 p-4 bg-slate-50">
+              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-3">Preview</p>
+              {profile.profileImage ? (
+                <img
+                  src={profile.profileImage}
+                  alt="Profile preview"
+                  className="w-full aspect-square object-cover rounded-xl border border-slate-200 bg-white"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              ) : (
+                <div className="w-full aspect-square rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm bg-white">
+                  No image
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">

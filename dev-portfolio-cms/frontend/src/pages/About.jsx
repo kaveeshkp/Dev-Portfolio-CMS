@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../api/axios";
 
 function About() {
+  const [profile, setProfile] = useState({
+    fullName: "Kaveesha",
+    title: "Full Stack Developer",
+    bio: "",
+    profileImage: "",
+  });
+
+  useEffect(() => {
+    api.get("/profile")
+      .then((res) => {
+        if (res.data) {
+          setProfile(res.data);
+        }
+      })
+      .catch(() => {
+        // Keep defaults if profile API fails.
+      });
+  }, []);
+
   const techStack = [
     { name: "React", category: "Frontend" },
     { name: "Tailwind CSS", category: "Frontend" },
@@ -40,12 +61,10 @@ function About() {
               About Me
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
-              I'm a Full Stack Developer passionate about building great products
+              I'm a {profile.title || "Full Stack Developer"} passionate about building great products
             </h1>
             <p className="mt-6 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              I specialize in creating responsive frontend experiences and secure
-              backend systems. My goal is to build applications that are not only
-              functional but also delightful to use.
+              {profile.bio || "I specialize in creating responsive frontend experiences and secure backend systems. My goal is to build applications that are not only functional but also delightful to use."}
             </p>
             <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               When I'm not coding, you can find me exploring new technologies,
@@ -69,9 +88,19 @@ function About() {
 
           <div className="relative">
             <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm p-8">
-              <div className="aspect-square rounded-2xl bg-linear-to-br from-slate-900 to-slate-700 flex items-center justify-center">
-                <span className="text-8xl font-bold text-white/20">K</span>
-              </div>
+              {profile.profileImage ? (
+                <img
+                  src={profile.profileImage}
+                  alt={profile.fullName || "Profile image"}
+                  className="aspect-square w-full object-cover rounded-2xl border border-slate-200 dark:border-slate-700"
+                />
+              ) : (
+                <div className="aspect-square rounded-2xl bg-linear-to-br from-slate-900 to-slate-700 flex items-center justify-center">
+                  <span className="text-8xl font-bold text-white/20">
+                    {(profile.fullName || "K").charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
